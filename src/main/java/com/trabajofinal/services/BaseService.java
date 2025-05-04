@@ -4,9 +4,12 @@ import com.trabajofinal.entities.BaseEntity;
 import com.trabajofinal.repositories.BaseRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public abstract class BaseService<E extends BaseEntity, ID extends Serializable> {
     protected BaseRepository<E, ID> baseRepository;
@@ -14,6 +17,15 @@ public abstract class BaseService<E extends BaseEntity, ID extends Serializable>
     public BaseService(BaseRepository<E, ID> baseRepository) {
         this.baseRepository = baseRepository;
     }
+    @Transactional
+    public Optional<E> getById(ID id) throws Exception{
+        try {
+            return Optional.ofNullable(baseRepository.findById(id).orElse(null));
+        }catch(Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
     @Transactional
     public List<E> get() throws Exception{
         try {

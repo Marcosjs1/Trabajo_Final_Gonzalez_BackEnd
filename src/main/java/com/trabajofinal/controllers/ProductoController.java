@@ -1,11 +1,15 @@
 package com.trabajofinal.controllers;
 
+import com.trabajofinal.entities.Catalogo;
 import com.trabajofinal.entities.Producto;
 import com.trabajofinal.services.BaseService;
 import com.trabajofinal.services.ProductoService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -13,5 +17,17 @@ import java.util.UUID;
 public class ProductoController extends BaseController<Producto, UUID> {
     public ProductoController(ProductoService productoService) {
         super(productoService);
+    }
+    @Autowired
+    private ProductoService productoService;
+    @PostMapping ("/catalogos/{idProducto}")
+    public Optional<Producto> agregarCatalogo(@RequestBody Catalogo catalogo, @PathVariable UUID idProducto) throws Exception{
+        Producto producto = productoService.agregarCatalogo(idProducto, catalogo);
+        return Optional.ofNullable(producto);
+    }
+    @GetMapping("/catalogos/{id}")
+    public ResponseEntity<List<Producto>> listarPorCatalogo(@PathVariable UUID id) throws Exception{
+        List<Producto> listaProductos = productoService.listarPorCatalogo(id);
+        return ResponseEntity.ok(listaProductos);
     }
 }

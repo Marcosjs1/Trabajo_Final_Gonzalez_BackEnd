@@ -27,4 +27,6 @@ public class OrdenCompraDetalle extends BaseEntity implements Serializable {
     private Producto producto;
 
     private Number cantidad;
+
+    private Long subtotal;
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseController<E extends BaseEntity, ID extends Serializable> {
     protected BaseService<E, ID> service;
@@ -15,6 +16,11 @@ public abstract class BaseController<E extends BaseEntity, ID extends Serializab
     public BaseController(BaseService<E, ID> service) {
         this.service = service;
     }
+    @GetMapping("/{id}")
+    public Optional<E> getById(@PathVariable ID id) throws Exception{
+        return service.getById(id);
+    }
+    
     @GetMapping()
     public ResponseEntity<List<E>>get()throws Exception{
         List<E>entities = service.get();
