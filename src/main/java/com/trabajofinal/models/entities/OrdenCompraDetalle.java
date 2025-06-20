@@ -1,13 +1,9 @@
-package com.trabajofinal.entities;
+package com.trabajofinal.models.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "ordenComprasDetalles")
@@ -15,6 +11,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class OrdenCompraDetalle extends BaseEntity implements Serializable {
 
 

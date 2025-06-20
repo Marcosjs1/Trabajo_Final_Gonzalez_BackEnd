@@ -1,13 +1,10 @@
-package com.trabajofinal.entities;
+package com.trabajofinal.models.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "imagenes")
@@ -15,7 +12,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Imagen extends BaseEntity implements Serializable {
+    @Transient
+    private MultipartFile file;
+
+    @Column(name = "public_id")
+    private String publicId;
 
     private String url;
     @ManyToOne

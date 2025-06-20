@@ -1,27 +1,24 @@
 package com.trabajofinal.services;
 
-import com.trabajofinal.entities.Direccion;
-import com.trabajofinal.entities.OrdenCompra;
-import com.trabajofinal.entities.Usuario;
-import com.trabajofinal.repositories.BaseRepository;
+import com.trabajofinal.models.entities.Direccion;
+import com.trabajofinal.models.entities.OrdenCompra;
+import com.trabajofinal.models.entities.Usuario;
 import com.trabajofinal.repositories.OrdenCompraRepository;
-import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.UUID;
 @Service
-public class OrdenCompraService extends BaseService<OrdenCompra, UUID>{
+public class OrdenCompraService extends BaseService<OrdenCompra, String>{
     public OrdenCompraService(OrdenCompraRepository ordenCompraRepository) {
         super(ordenCompraRepository);
     }
     @Autowired
     private OrdenCompraRepository ordenCompraRepository;
     @Transactional
-    public OrdenCompra agregarUsuario(UUID idOrdenCompra, Usuario usuario) throws Exception  {
+    public OrdenCompra agregarUsuario(String idOrdenCompra, Usuario usuario) throws Exception  {
         try {
             OrdenCompra ordenCompra = ordenCompraRepository.findById(idOrdenCompra).orElse(null);
             if (ordenCompra != null){
@@ -36,7 +33,7 @@ public class OrdenCompraService extends BaseService<OrdenCompra, UUID>{
         }
     }
     @Transactional
-    public OrdenCompra agregarDireccion (UUID idOrdenCompra, Direccion direccion) throws Exception {
+    public OrdenCompra agregarDireccion (String idOrdenCompra, Direccion direccion) throws Exception {
         try {
             OrdenCompra ordenCompra = ordenCompraRepository.findById(idOrdenCompra).orElse(null);
             if (ordenCompra != null){
@@ -51,7 +48,7 @@ public class OrdenCompraService extends BaseService<OrdenCompra, UUID>{
         }
     }
     @Transactional
-    public List<OrdenCompra> listarPorUsuario (UUID idUsuario) throws Exception{
+    public List<OrdenCompra> listarPorUsuario (String idUsuario) throws Exception{
         try {
             return ordenCompraRepository.findAllByUsuarioId(idUsuario);
         }catch (Exception e){
@@ -59,9 +56,9 @@ public class OrdenCompraService extends BaseService<OrdenCompra, UUID>{
         }
     }
     @Transactional
-    public List<OrdenCompra> listarPorDireccion(UUID idDireccion) throws Exception{
+    public List<OrdenCompra> listarPorDireccion(String idDireccion) throws Exception{
         try {
-         return ordenCompraRepository.findAllByDireccionId(idDireccion);
+         return ordenCompraRepository.findAllByDireccionEnvioId(idDireccion);
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

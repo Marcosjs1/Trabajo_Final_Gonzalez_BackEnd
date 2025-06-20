@@ -1,4 +1,4 @@
-package com.trabajofinal.entities;
+package com.trabajofinal.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,7 +6,6 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "direcciones")
@@ -22,7 +21,7 @@ public class Direccion extends BaseEntity implements Serializable {
     private String pais;
     private String provincia;
     private String departamento;
-    @ManyToMany(mappedBy = "usuarios")
+    @ManyToMany(mappedBy = "direcciones")
     @Builder.Default
     private List<Usuario>usuarios = new ArrayList<>();
 }

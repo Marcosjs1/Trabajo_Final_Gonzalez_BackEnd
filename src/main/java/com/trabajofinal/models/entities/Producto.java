@@ -1,12 +1,11 @@
-package com.trabajofinal.entities;
+package com.trabajofinal.models.entities;
 
-import com.trabajofinal.entities.enums.Sexo;
-import com.trabajofinal.entities.enums.TipoProducto;
+import com.trabajofinal.models.entities.enums.Sexo;
+import com.trabajofinal.models.entities.enums.TipoProducto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "productos")
@@ -14,6 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Producto extends BaseEntity implements Serializable {
 
     private String nombre;

@@ -1,9 +1,8 @@
 package com.trabajofinal.services;
 
-import com.trabajofinal.entities.Descuento;
-import com.trabajofinal.entities.DetalleProducto;
-import com.trabajofinal.entities.Precio;
-import com.trabajofinal.repositories.BaseRepository;
+import com.trabajofinal.models.entities.Descuento;
+import com.trabajofinal.models.entities.DetalleProducto;
+import com.trabajofinal.models.entities.Precio;
 import com.trabajofinal.repositories.PrecioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 @Service
-public class PrecioService extends BaseService<Precio, UUID>{
+public class PrecioService extends BaseService<Precio, String>{
     public PrecioService(PrecioRepository precioRepository) {
         super(precioRepository);
     }
     @Autowired
     private PrecioRepository precioRepository;
     @Transactional
-    public Precio agregarDetalleProducto(UUID idPrecio , DetalleProducto detalleProducto) throws Exception{
+    public Precio agregarDetalleProducto(String idPrecio , DetalleProducto detalleProducto) throws Exception{
         try {
          Precio precio = precioRepository.findById(idPrecio).orElse(null);
          if (precio != null){
@@ -34,7 +33,7 @@ public class PrecioService extends BaseService<Precio, UUID>{
         }
     }
     @Transactional
-    public Precio agregarDescuento (UUID idPrecio, Descuento descuento) throws Exception{
+    public Precio agregarDescuento (String idPrecio, Descuento descuento) throws Exception{
         try {
          Precio precio = precioRepository.findById(idPrecio).orElse(null);
          if (precio!= null){
@@ -49,7 +48,7 @@ public class PrecioService extends BaseService<Precio, UUID>{
         }
     }
     @Transactional
-    public List<Precio> listarPorDetalleProducto (UUID idDetalleProducto) throws Exception{
+    public List<Precio> listarPorDetalleProducto (String idDetalleProducto) throws Exception{
         try {
          return precioRepository.findAllByDetalleProductoId(idDetalleProducto);
 
@@ -58,7 +57,7 @@ public class PrecioService extends BaseService<Precio, UUID>{
         }
     }
     @Transactional
-    public List<Precio> listarPorDescuento (UUID idDescuento) throws Exception{
+    public List<Precio> listarPorDescuento (String idDescuento) throws Exception{
         try {
             return precioRepository.findAllByDescuentoId(idDescuento);
         }catch (Exception e){

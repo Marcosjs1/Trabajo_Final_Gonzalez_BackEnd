@@ -1,4 +1,4 @@
-package com.trabajofinal.entities.enums;
+package com.trabajofinal.models.entities.enums;
 
 public enum TipoProducto {
     ZAPATILLA,

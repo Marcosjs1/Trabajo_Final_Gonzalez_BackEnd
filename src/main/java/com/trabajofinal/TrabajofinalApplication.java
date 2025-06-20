@@ -8,6 +8,8 @@ public class TrabajofinalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TrabajofinalApplication.class, args);
+		System.out.println();
+		System.out.println("La base de datos esta corriendo");
 	}
 
 }

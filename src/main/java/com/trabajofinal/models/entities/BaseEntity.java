@@ -1,4 +1,4 @@
-package com.trabajofinal.entities;
+package com.trabajofinal.models.entities;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -15,8 +15,11 @@ import lombok.experimental.SuperBuilder;
 
 public abstract class BaseEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected String id;
 
-    protected UUID id;
+    @PrePersist
+    public void generateId() {
+        if (id == null) id = UUID.randomUUID().toString();
 
+    }
 }

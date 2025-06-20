@@ -1,6 +1,6 @@
 package com.trabajofinal.repositories;
 
-import com.trabajofinal.entities.BaseEntity;
+import com.trabajofinal.models.entities.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

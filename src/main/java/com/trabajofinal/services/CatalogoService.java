@@ -1,6 +1,6 @@
 package com.trabajofinal.services;
 
-import com.trabajofinal.entities.Catalogo;
+import com.trabajofinal.models.entities.Catalogo;
 
 import com.trabajofinal.repositories.CatalogoRepository;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 @Service
-public class CatalogoService extends BaseService<Catalogo, UUID>{
+public class CatalogoService extends BaseService<Catalogo, String>{
     public CatalogoService(CatalogoRepository catalogoRepository) {
         super(catalogoRepository);
     }

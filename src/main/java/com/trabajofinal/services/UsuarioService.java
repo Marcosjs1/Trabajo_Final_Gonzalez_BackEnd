@@ -1,8 +1,7 @@
 package com.trabajofinal.services;
 
-import com.trabajofinal.entities.Direccion;
-import com.trabajofinal.entities.Usuario;
-import com.trabajofinal.repositories.BaseRepository;
+import com.trabajofinal.models.entities.Direccion;
+import com.trabajofinal.models.entities.Usuario;
 import com.trabajofinal.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 @Service
-public class UsuarioService extends BaseService<Usuario, UUID>{
+public class UsuarioService extends BaseService<Usuario, String>{
     public UsuarioService(UsuarioRepository usuarioRepository) {
         super(usuarioRepository);
     }
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Transactional
-    public Usuario agregarDirecciones(UUID idUsuario, List<Direccion> direcciones) throws Exception{
+    public Usuario agregarDirecciones(String idUsuario, List<Direccion> direcciones) throws Exception{
         try {
          Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
          if (usuario != null){
@@ -33,9 +32,9 @@ public class UsuarioService extends BaseService<Usuario, UUID>{
         }
     }
     @Transactional
-    public List<Usuario> listarPorDireccion (UUID idDireccion) throws Exception {
+    public List<Usuario> listarPorDireccion (String idDireccion) throws Exception {
         try {
-            return usuarioRepository.findAllByDireccionId(idDireccion);
+            return usuarioRepository.findAllByDireccionesId(idDireccion);
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

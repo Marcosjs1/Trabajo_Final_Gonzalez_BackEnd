@@ -1,10 +1,9 @@
 package com.trabajofinal.services;
 
-import com.trabajofinal.entities.BaseEntity;
+import com.trabajofinal.models.entities.BaseEntity;
 import com.trabajofinal.repositories.BaseRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,6 +28,7 @@ public abstract class BaseService<E extends BaseEntity, ID extends Serializable>
     @Transactional
     public List<E> get() throws Exception{
         try {
+            System.out.println("Usuarios en DB: " + baseRepository.findAll().size());
             return baseRepository.findAll();
         }catch (Exception e){
             throw new Exception(e.getMessage());

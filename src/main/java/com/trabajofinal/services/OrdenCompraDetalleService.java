@@ -1,9 +1,8 @@
 package com.trabajofinal.services;
 
-import com.trabajofinal.entities.OrdenCompra;
-import com.trabajofinal.entities.OrdenCompraDetalle;
-import com.trabajofinal.entities.Producto;
-import com.trabajofinal.repositories.BaseRepository;
+import com.trabajofinal.models.entities.OrdenCompra;
+import com.trabajofinal.models.entities.OrdenCompraDetalle;
+import com.trabajofinal.models.entities.Producto;
 import com.trabajofinal.repositories.OrdenCompraDetalleRepository;
 import com.trabajofinal.repositories.OrdenCompraRepository;
 import jakarta.transaction.Transactional;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 @Service
-public class OrdenCompraDetalleService extends BaseService<OrdenCompraDetalle, UUID>{
+public class OrdenCompraDetalleService extends BaseService<OrdenCompraDetalle, String>{
     public OrdenCompraDetalleService(OrdenCompraDetalleRepository ordenCompraDetalleRepository) {
         super(ordenCompraDetalleRepository);
     }
@@ -22,7 +21,7 @@ public class OrdenCompraDetalleService extends BaseService<OrdenCompraDetalle, U
     @Autowired
     private OrdenCompraRepository ordenCompraRepository;
     @Transactional
-    public OrdenCompraDetalle agregarOrdenCompra (UUID idOrdenCompraDetalle, OrdenCompra ordenCompra) throws Exception{
+    public OrdenCompraDetalle agregarOrdenCompra (String idOrdenCompraDetalle, OrdenCompra ordenCompra) throws Exception{
         try {
             OrdenCompraDetalle ordenCompraDetalle = ordenCompraDetalleRepository.findById(idOrdenCompraDetalle).orElse(null);
             if (ordenCompraDetalle != null){
@@ -39,7 +38,7 @@ public class OrdenCompraDetalleService extends BaseService<OrdenCompraDetalle, U
         }
     }
     @Transactional
-    public OrdenCompraDetalle agregarProducto (UUID idOrdenCompraDetalle, Producto producto) throws Exception{
+    public OrdenCompraDetalle agregarProducto (String idOrdenCompraDetalle, Producto producto) throws Exception{
         try{
             OrdenCompraDetalle ordenCompraDetalle = ordenCompraDetalleRepository.findById(idOrdenCompraDetalle).orElse(null);
         if (ordenCompraDetalle != null){
@@ -54,7 +53,7 @@ public class OrdenCompraDetalleService extends BaseService<OrdenCompraDetalle, U
         }
     }
     @Transactional
-    public List<OrdenCompraDetalle> listarPorOrdenCompra( UUID idOrdenCompra) throws Exception{
+    public List<OrdenCompraDetalle> listarPorOrdenCompra( String idOrdenCompra) throws Exception{
         try {
             return ordenCompraDetalleRepository.findAllByOrdenCompraId(idOrdenCompra);
         }catch (Exception e) {
@@ -62,7 +61,7 @@ public class OrdenCompraDetalleService extends BaseService<OrdenCompraDetalle, U
         }
     }
     @Transactional
-    public List<OrdenCompraDetalle> listarPorProducto( UUID idProducto) throws Exception{
+    public List<OrdenCompraDetalle> listarPorProducto( String idProducto) throws Exception{
         try {
             return ordenCompraDetalleRepository.findAllByProductoId(idProducto);
         }catch (Exception e) {
